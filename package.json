@@ -1,0 +1,20 @@
+{
+  "name": "cron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "node-cron": "^3.0.1",
+    "nodemon": "^2.0.18",
+    "oracledb": "^5.4.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
+  }
+}
