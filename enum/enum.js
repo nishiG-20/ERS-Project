@@ -10,9 +10,11 @@ exports.fetchingJiraRecords = {
 //-------------------------- Configuration required for Creating ERS Project-------------------------------------
 
 exports.creatingERSProject = {
-  url: "https://app.eresourcescheduler.cloud/rest/v1/projects",
+  // url: "https://app.eresourcescheduler.cloud/rest/v1/projects",
+  url: "https://app.eresourcescheduler.cloud/rest/v1/projectsssssss",
   contentType: "application/json",
-  authorizationToken: "Bearer e0e1nhh5horvcvdkpss9hif89yu3d5",
+  // authorizationToken: "Bearer e0e1nhh5horvcvdkpss9hif89yu3d5",
+  authorizationToken: "Bearer e0e1nhh5horvcvdkpss9hif89yu3d50000000000000",
   projectType: { standard: 1 },
   udfBillingStatus: { billable: 334, noBillable: 336 },
   method: "POST",

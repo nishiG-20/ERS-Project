@@ -5,15 +5,16 @@ const config = require("./enum/enum.js");
 
 //Declaring body and header for Jira Project Records
 const makeOptionsforJiraProjectRecords = (start, maxResults = 50) => {
-  let currentDate = utils.formatDate(new Date());
-  let oldDate = utils.subtractMonths(5);
+  // let currentDate = utils.formatDate(new Date());
+  let oldDate = utils.subtractDays(1);
 
   return {
     method: "POST",
     url: "http://localhost:4000/api/fetchJiraTasks",
     json: true,
     body: {
-      jql: `createdDate<=${currentDate} AND createdDate>=${oldDate}`,
+      // jql: `createdDate<=${currentDate} AND createdDate>=${oldDate}`,
+      jql: `createdDate>=${oldDate}`,
       fieldsByKeys: false,
       fields: [
         "summary",
@@ -139,10 +140,8 @@ const makeOptionsForERSCreateProject = (projName, createdDate) => {
 
 //Checking Jira Project is Exists in ERS or not
 const isJiraProjInERS = (jiraProj, ersRecords) => {
- 
-  let isProjectExist = ersRecords.find(
-    (ersProj) => ersProj.title === jiraProj
-  );
+  let isProjectExist = ersRecords.find((ersProj) => ersProj.title === jiraProj); //
+
   if (isProjectExist) {
     return isProjectExist.id;
   } else {
@@ -254,7 +253,6 @@ function cronJobs() {
 
   cronJobs.prototype.loadJiraDataInERS = async (jiraRecords) => {
     try {
-    
       for (let i = 0; i < jiraRecords.length; i++) {
         let jiraTask = jiraRecords[i].key + " " + jiraRecords[i].fields.summary;
 
@@ -276,6 +274,8 @@ function cronJobs() {
         );
 
         if (ersProjectId) {
+          console.log("ersProjectId= " + ersProjectId);
+
           //Get The Tasks of the ERS Project
           let ersTasks = await this.getERSTasks(ersProjectId);
 
@@ -389,3 +389,6 @@ function cronJobs() {
 }
 
 module.exports = new cronJobs();
+
+// let coneJob = new cronJobs();
+// coneJob.fetchJiraProjectRecords();

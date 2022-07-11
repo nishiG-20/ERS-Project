@@ -46,9 +46,8 @@ const setupServer = () => {
 };
 setupServer(true);
 
-// cron.schedule(" * * * * * *", () => {
-//   coneJob.fetchJiraProjectRecords();
-// });
+cron.schedule(" * * * * * *", () => {
+  coneJob.fetchJiraProjectRecords();
+});
 
 
-//coneJob.fetchJiraProjectRecords();
