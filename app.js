@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const http = require("http");
 const jiraTasks = require("./routes/jira_tasks");
 const cron = require("node-cron");
-const coneJob = require("./cron-ping.js");
+const coneJob = require("./ersUpdateApi.js");
 
 var app;
 var httpServer;
@@ -46,8 +46,6 @@ const setupServer = () => {
 };
 setupServer(true);
 
-cron.schedule(" * * * * * *", () => {
+cron.schedule("*/2 * * * *", async () => {
   coneJob.fetchJiraProjectRecords();
 });
-
-
