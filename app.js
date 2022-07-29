@@ -47,5 +47,6 @@ const setupServer = () => {
 setupServer(true);
 
 cron.schedule("*/2 * * * *", async () => {
+  console.log('2 minutes Timer...')
   coneJob.fetchJiraProjectRecords();
 });

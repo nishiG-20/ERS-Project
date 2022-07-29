@@ -397,7 +397,11 @@ function cronJobs() {
     try {
       for (let i = 0; i < jiraRecords.length; i++) {
         let jiraTaskKey = jiraRecords[i].key;
-        let jiraTask = jiraRecords[i].key + " " + jiraRecords[i].fields.summary;
+        let jiraSummary = jiraRecords[i].fields.summary;
+        jiraSummary.replace(/"/g, "");
+        let task = `${jiraRecords[i].key} ${jiraSummary}`;
+        let jiraTask = task.substring(0, 99);
+
         //let emailAddress = jiraRecords[i].fields.assignee.emailAddress;
         let emailAddress = "shakun.arora@rstartec.com";
 
@@ -437,6 +441,7 @@ function cronJobs() {
                 createdDateOfJIRAProj
               ))
             ) {
+              // console.log('Task should be created....')
               await this.createJiraTasksinERS(
                 jiraTask,
                 createdDateOfJIRAProj,
@@ -515,14 +520,20 @@ function cronJobs() {
       createdDateOfJIRAProj,
       ersProjectId
     );
+    // console.log('Task should be created part-2')
+    // console.log(options)
     return new Promise((resolve, reject) => {
       try {
         request(options, async (error, response) => {
+          console.log("Status is.." + response.statusCode);
           if (response.statusCode === 201) {
+            console.log("staus is good.....");
             resolve(true);
           }
         });
       } catch (error) {
+        console.log("Error is coming....");
+        console.log(error);
         throw error;
       }
     });
