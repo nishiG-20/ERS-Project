@@ -594,6 +594,3 @@ function cronJobs() {
 }
 
 module.exports = new cronJobs();
-
-// let coneJob = new cronJobs();
-// coneJob.fetchJiraProjectRecords();
